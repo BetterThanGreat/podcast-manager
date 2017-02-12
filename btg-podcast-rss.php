@@ -6,6 +6,9 @@
 add_action( 'init', 'btg_podcast_rss' );
 function btg_podcast_rss() {
     add_feed( BTG_PODCAST_FEED_SLUG, 'btg_register_feed_template' );
+
+    global $wp_rewrite;
+    $wp_rewrite->flush_rules( false );
 }
 
 /* Filter the type, this hook wil set the correct HTTP header for Content-type. */

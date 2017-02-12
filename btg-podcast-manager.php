@@ -47,8 +47,9 @@ function btg_podcast_manager_on_activate() {
 	}
 
 	// Feed not yet registered, so lets flush the rules once.
-	if ( ! $registered )
+	if ( ! $registered ) {
 		flush_rewrite_rules( FALSE );
+	}
 }
 register_activation_hook( __FILE__, 'btg_podcast_manager_on_activate' );
 
