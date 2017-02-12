@@ -8,17 +8,20 @@ Template Name: Podcast RSS
 $args = array( 'post_type' => BTG_PODCAST_POST_TYPE, 'posts_per_page' => 100 );
 $loop = new WP_Query( $args );
 
+// Require WP Media library
+require_once( ABSPATH . 'wp-admin/includes/media.php' );
+
 /**
 * Get the current URL taking into account HTTPS and Port
 * @link http://css-tricks.com/snippets/php/get-current-page-url/
 * @version Refactored by @AlexParraSilva
 */
 function getCurrentUrl() {
-$url  = isset( $_SERVER['HTTPS'] ) && 'on' === $_SERVER['HTTPS'] ? 'https' : 'http';
-$url .= '://' . $_SERVER['SERVER_NAME'];
-$url .= in_array( $_SERVER['SERVER_PORT'], array('80', '443') ) ? '' : ':' . $_SERVER['SERVER_PORT'];
-$url .= $_SERVER['REQUEST_URI'];
-return $url;
+  $url  = isset( $_SERVER['HTTPS'] ) && 'on' === $_SERVER['HTTPS'] ? 'https' : 'http';
+  $url .= '://' . $_SERVER['SERVER_NAME'];
+  $url .= in_array( $_SERVER['SERVER_PORT'], array('80', '443') ) ? '' : ':' . $_SERVER['SERVER_PORT'];
+  $url .= $_SERVER['REQUEST_URI'];
+  return $url;
 }
 
 // Output the XML header
@@ -60,6 +63,22 @@ echo '<?xml version="1.0" encoding="'.get_option('blog_charset').'"?'.'>';
 
     <?php // Start the loop for Podcast posts
     while ( $loop->have_posts() ) : $loop->the_post(); ?>
+
+    <?php // Get the file field URL, filesize and date format
+      $audio_file = get_post_meta($post->ID, BTG_PODCAST_AUDIO_FIELD_ID, true);
+
+      if (!$audio_file) continue;
+
+      $fileurl = $audio_file['url'];
+      $mime_type = $audio_file['type'];
+
+      $head = array_change_key_case(get_headers($fileurl, TRUE));
+      $filesize = $head['content-length'];
+
+      $audio_meta = wp_read_audio_metadata( $audio_file['file'] );
+      $dateformatstring = _x( 'D, d M Y H:i:s O', 'Date formating for iTunes feed.' );
+    ?>
+
     <item>
       <title><?php the_title_rss(); ?></title>
       <itunes:author><?php echo get_bloginfo('name'); ?></itunes:author>
@@ -70,18 +89,10 @@ echo '<?xml version="1.0" encoding="'.get_option('blog_charset').'"?'.'>';
         <itunes:image href="<?php echo $image[0]; ?>" />
       <?php endif; ?>
 
-      <?php // Get the file field URL, filesize and date format
-        $attachment_id = get_field('podcast_file');
-        $fileurl = wp_get_attachment_url( $attachment_id );
-        $filesize = filesize( get_attached_file( $attachment_id ) );
-        $dateformatstring = _x( 'D, d M Y H:i:s O', 'Date formating for iTunes feed.' );
-      ?>
-
-      <enclosure url="<?php echo $fileurl; ?>" length="<?php echo $filesize; ?>" type="audio/mpeg" />
+      <enclosure url="<?php echo $fileurl; ?>" length="<?php echo $filesize; ?>" type="<?php echo $mime_type; ?>" />
       <guid><?php echo $fileurl; ?></guid>
-      <guid><?php the_field('podcast_file'); ?></guid>
-      <pubDate><?php echo date($dateformatstring, $show_date); ?></pubDate>
-      <itunes:duration><?php the_field('podcast_duration'); ?></itunes:duration>
+      <pubDate><?php echo get_the_date($dateformatstring); ?></pubDate>
+      <itunes:duration><?php echo $audio_meta['length_formatted']; ?></itunes:duration>
     </item>
     <?php endwhile; ?>
 
