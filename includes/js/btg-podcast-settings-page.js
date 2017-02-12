@@ -42,4 +42,25 @@ jQuery( document ).ready( function( $ ) {
     jQuery( 'a.add_media' ).on( 'click', function() {
         wp.media.model.settings.post.id = wp_media_post_id;
     });
+
+    // Update Sub-Category Options when Category changes
+    $('#category').on('change', function() { updateSubCategories(true); });
+
+    function updateSubCategories(resetSubcategory) {
+        var categoryId = $('#category').find('option:selected').data('category-id');
+
+        if (resetSubcategory) $('#subcategory option:selected').prop('selected', false);
+
+        $('#subcategory option').each(function(index, elem){
+            var shouldShow = $(elem).data('category-id') == categoryId || $(elem).data('category-id') == 0;
+            
+            if (shouldShow) {
+                $(elem).show();
+            } else {
+                $(elem).hide();
+            }
+        });
+    }
+
+    updateSubCategories(false);
 });

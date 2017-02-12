@@ -20,7 +20,6 @@
 						}
 					?>
 
-
 					<div class='image-preview-wrapper'>
 						<img id='image-preview' src='<?php echo $btg_podcast_cover_url; ?>' width='100' height='100' style='max-height: 100px; width: 100px;'>
 					</div>
@@ -68,10 +67,10 @@
 				<td scope="row">Sub Category</td>
 				<td>
 					<select value="<?php echo esc_attr( get_option(BTG_PODCAST_SETTINGS_SUB_CATEGORY) ); ?>" name="<?php echo BTG_PODCAST_SETTINGS_SUB_CATEGORY ?>" id="<?php echo BTG_PODCAST_SETTINGS_SUB_CATEGORY; ?>">
-						<option value="">-- PICK A SUB-CATEGORY --</option>
+						<option data-category-id="0" value="">-- PICK A SUB-CATEGORY --</option>
 						<?php $btg_selected_sub_category = esc_attr( get_option(BTG_PODCAST_SETTINGS_SUB_CATEGORY) ); ?>
 
-						<!-- Arts -->
+						<!-- 1. Arts -->
 						<option data-category-id="1" value="Design" <?php if ($btg_selected_sub_category == 'Design') echo 'selected'; ?>>Design</option>
 						<option data-category-id="1" value="Fashion &amp; Beauty" <?php if ($btg_selected_sub_category == 'Fashion &amp; Beauty') echo 'selected'; ?>>Fashion &amp; Beauty</option>
 						<option data-category-id="1" value="Food" <?php if ($btg_selected_sub_category == 'Food') echo 'selected'; ?>>Food</option>
@@ -80,10 +79,91 @@
 						<option data-category-id="1" value="Visual Arts" <?php if ($btg_selected_sub_category == 'Visual Arts') echo 'selected'; ?>>Visual Arts</option>
 						<!-- End Arts -->
 
-						<!-- TODO: the rest of these  -->
-						<!-- Business -->
-
+						<!-- 2. Business -->
+						<option data-category-id="2" value="Business News" <?php if ($btg_selected_sub_category == 'Business News') echo 'selected'; ?>>Business News</option>
+						<option data-category-id="2" value="Careers" <?php if ($btg_selected_sub_category == 'Careers') echo 'selected'; ?>>Careers</option>
+						<option data-category-id="2" value="Investing" <?php if ($btg_selected_sub_category == 'Investing') echo 'selected'; ?>>Investing</option>
+						<option data-category-id="2" value="Management &amp; Marketing" <?php if ($btg_selected_sub_category == 'Management &amp; Marketing') echo 'selected'; ?>>Management &amp; Marketing</option>
+						<option data-category-id="2" value="Shopping" <?php if ($btg_selected_sub_category == 'Shopping') echo 'selected'; ?>>Shopping</option>
 						<!-- End Business -->
+
+						<!-- 3. Comedy -->
+						<!-- End Comedy -->
+
+						<!-- 4. Education -->
+						<option data-category-id="4" value="Educational Technology" <?php if ($btg_selected_sub_category == 'Educational Technology') echo 'selected'; ?>>Educational Technology</option>
+						<option data-category-id="4" value="Higher Education" <?php if ($btg_selected_sub_category == 'Higher Education') echo 'selected'; ?>>Higher Education</option>
+						<option data-category-id="4" value="K-12" <?php if ($btg_selected_sub_category == 'K-12') echo 'selected'; ?>>K-12</option>
+						<option data-category-id="4" value="Language Courses" <?php if ($btg_selected_sub_category == 'Language Courses') echo 'selected'; ?>>Language Courses</option>
+						<option data-category-id="4" value="Training" <?php if ($btg_selected_sub_category == 'Training') echo 'selected'; ?>>Training</option>
+						<!-- End Education -->
+
+						<!-- 5. Games & Hobbies -->
+						<option data-category-id="5" value="Automotive" <?php if ($btg_selected_sub_category == 'Automotive') echo 'selected'; ?>>Automotive</option>
+						<option data-category-id="5" value="Aviation" <?php if ($btg_selected_sub_category == 'Aviation') echo 'selected'; ?>>Aviation</option>
+						<option data-category-id="5" value="Hobbies" <?php if ($btg_selected_sub_category == 'Hobbies') echo 'selected'; ?>>Hobbies</option>
+						<option data-category-id="5" value="Other Games" <?php if ($btg_selected_sub_category == 'Other Games') echo 'selected'; ?>>Other Games</option>
+						<option data-category-id="5" value="Video Games" <?php if ($btg_selected_sub_category == 'Video Games') echo 'selected'; ?>>Video Games</option>
+						<!-- End Games & Hobbies -->
+
+						<!-- 6. Government & Organizations -->
+						<option data-category-id="6" value="Local" <?php if ($btg_selected_sub_category == 'Local') echo 'selected'; ?>>Local</option>
+						<option data-category-id="6" value="National" <?php if ($btg_selected_sub_category == 'National') echo 'selected'; ?>>National</option>
+						<option data-category-id="6" value="Non-Profit" <?php if ($btg_selected_sub_category == 'Non-Profit') echo 'selected'; ?>>Non-Profit</option>
+						<option data-category-id="6" value="Regional" <?php if ($btg_selected_sub_category == 'Regional') echo 'selected'; ?>>Regional</option>
+						<!-- End Government & Organizations -->
+
+						<!-- 7. Health -->
+						<option data-category-id="7" value="Alternative Health" <?php if ($btg_selected_sub_category == 'Alternative Health') echo 'selected'; ?>>Alternative Health</option>
+						<option data-category-id="7" value="Fitness &amp; Nutrition" <?php if ($btg_selected_sub_category == 'Fitness &amp; Nutrition') echo 'selected'; ?>>Fitness &amp; Nutrition</option>
+						<option data-category-id="7" value="Self-Help" <?php if ($btg_selected_sub_category == 'Self-Help') echo 'selected'; ?>>Self-Help</option>
+						<option data-category-id="7" value="Sexuality" <?php if ($btg_selected_sub_category == 'Sexuality') echo 'selected'; ?>>Sexuality</option>
+						<option data-category-id="7" value="Kids &amp; Family" <?php if ($btg_selected_sub_category == 'Kids &amp; Family') echo 'selected'; ?>>Kids &amp; Family</option>
+						<!-- End Health -->
+
+						<!-- 8. Music -->
+						<!-- End Music -->
+
+						<!-- 9. News & Politics -->
+						<!-- End News & Politics -->
+
+						<!-- 10. Religion & Spirituality -->
+						<option data-category-id="10" value="Buddhism" <?php if ($btg_selected_sub_category == 'Buddhism') echo 'selected'; ?>>Buddhism</option>
+						<option data-category-id="10" value="Christianity" <?php if ($btg_selected_sub_category == 'Christianity') echo 'selected'; ?>>Christianity</option>
+						<option data-category-id="10" value="Hinduism" <?php if ($btg_selected_sub_category == 'Hinduism') echo 'selected'; ?>>Hinduism</option>
+						<option data-category-id="10" value="Islam" <?php if ($btg_selected_sub_category == 'Islam') echo 'selected'; ?>>Islam</option>
+						<option data-category-id="10" value="Judaism" <?php if ($btg_selected_sub_category == 'Judaism') echo 'selected'; ?>>Judaism</option>
+						<option data-category-id="10" value="Other" <?php if ($btg_selected_sub_category == 'Other') echo 'selected'; ?>>Other</option>
+						<option data-category-id="10" value="Spirituality" <?php if ($btg_selected_sub_category == 'Spirituality') echo 'selected'; ?>>Spirituality</option>
+						<!-- End Religion & Spirituality -->
+
+						<!-- 11. Science & Medicine -->
+						<option data-category-id="11" value="Medicine" <?php if ($btg_selected_sub_category == 'Medicine') echo 'selected'; ?>>Medicine</option>
+						<option data-category-id="11" value="Natural Sciences" <?php if ($btg_selected_sub_category == 'Natural Sciences') echo 'selected'; ?>>Natural Sciences</option>
+						<option data-category-id="11" value="Social Sciences" <?php if ($btg_selected_sub_category == 'Social Sciences') echo 'selected'; ?>>Social Sciences</option>
+						<!-- End Science & Medicine -->
+
+						<!-- 12. Society & Culture -->
+						<option data-category-id="12" value="History" <?php if ($btg_selected_sub_category == 'History') echo 'selected'; ?>>History</option>
+						<option data-category-id="12" value="Personal Journals" <?php if ($btg_selected_sub_category == 'Personal Journals') echo 'selected'; ?>>Personal Journals</option>
+						<option data-category-id="12" value="Philosophy" <?php if ($btg_selected_sub_category == 'Philosophy') echo 'selected'; ?>>Philosophy</option>
+						<option data-category-id="12" value="Places &amp; Travel" <?php if ($btg_selected_sub_category == 'Places &amp; Travel') echo 'selected'; ?>>Places &amp; Travel</option>
+						<!-- End Society & Culture -->
+
+						<!-- 13. Sports & Recreation -->
+						<option data-category-id="13" value="Amateur" <?php if ($btg_selected_sub_category == 'Amateur') echo 'selected'; ?>>Amateur</option>
+						<option data-category-id="13" value="College &amp; High School" <?php if ($btg_selected_sub_category == 'College &amp; High School') echo 'selected'; ?>>College &amp; High School</option>
+						<option data-category-id="13" value="Outdoor" <?php if ($btg_selected_sub_category == 'Outdoor') echo 'selected'; ?>>Outdoor</option>
+						<option data-category-id="13" value="Professional" <?php if ($btg_selected_sub_category == 'Professional') echo 'selected'; ?>>Professional</option>
+						<option data-category-id="13" value="TV &amp; Film" <?php if ($btg_selected_sub_category == 'TV &amp; Film') echo 'selected'; ?>>TV &amp; Film</option>
+						<!-- End Sports & Recreation -->
+
+						<!-- 14. Technology -->
+						<option data-category-id="14" value="Gadgets" <?php if ($btg_selected_sub_category == 'Gadgets') echo 'selected'; ?>>Gadgets</option>
+						<option data-category-id="14" value="Podcasting" <?php if ($btg_selected_sub_category == 'Podcasting') echo 'selected'; ?>>Podcasting</option>
+						<option data-category-id="14" value="Software How-To" <?php if ($btg_selected_sub_category == 'Software How-To') echo 'selected'; ?>>Software How-To</option>
+						<option data-category-id="14" value="Tech News" <?php if ($btg_selected_sub_category == 'Tech News') echo 'selected'; ?>>Tech News</option>
+						<!-- End Technology -->
 
 					</select>
 				</td>
